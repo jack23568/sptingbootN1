@@ -23,7 +23,7 @@ jobs:
           pwd
           cd /home/
           ls
-          ssh -p root@106.12.118.138
+          ssh -p 10086 root@106.12.118.138
           pwd
           ll
           exit
