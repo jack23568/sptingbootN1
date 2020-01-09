@@ -22,11 +22,9 @@ jobs:
           chmod 700 ~/.ssh && chmod 600 ~/.ssh/*
       - name: Connect SSH And Do
         run: |
-          pwd
-          ls
           ssh -p 10086 -i ~/.ssh/id_rsa root@106.12.118.138
-          pwd
-          ls
+          cd /home/file/jar_package
+          nohup java -jar eureka-8765.jar > log.log &
           exit
           
           
