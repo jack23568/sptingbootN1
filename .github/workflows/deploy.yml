@@ -13,7 +13,7 @@ jobs:
         env:
           DEPLOY_KEY: ${{secrets.DEPLOY_KEY}}
           PUBLIC_KEY: ${{secrets.PUBLIC_KEY}}
-          KNOWN_HOST: ${{secrets.KNOWN_HOST))
+          KNOWN_HOST: ${{secrets.KNOWN_HOST}}
         run: |
           mkdir -p ~/.ssh/
           echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
