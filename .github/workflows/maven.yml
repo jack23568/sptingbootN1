@@ -26,11 +26,16 @@ jobs:
     - name: deploy
       uses: appleboy/ssh-action@master
       with:
-        host: 106.12.118.138
-        username: root
-        port: 10086
-        key: ${{secrets.DEPLOY_KEY}}
-        script: "java -jar /home/file/jar_package/eureka-8765.jar > web.log"
+        host: ${{secrets.host}}
+        username: ${{secrets.user}}
+        port: ${{secrets.poart}}
+        key: ${{secrets.test_key}}
+        script: |
+          ls
+          pwd
+          cd /home/file/jar_package
+          nohup java -jar eureka*3.jar > web.log &
+          date
           
           
    
