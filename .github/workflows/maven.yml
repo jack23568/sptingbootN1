@@ -34,7 +34,7 @@ jobs:
           ls
           pwd
           cd /home/file/jar_package
-          nohup java -jar eureka*3.jar > web.log &
+          nohup java -jar eureka*.jar > web.log &
           date
           
           
