@@ -12,17 +12,18 @@ jobs:
       - name: Set SSH Environment
         env:
           DEPLOY_KEY: ${{secrets.DEPLOY_KEY}}
+          PUBLIC_KEY: ${{secrets.PUBLIC_KEY}}
         run: |
           mkdir -p ~/.ssh/
           echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
+          echo "$PUBLIC_KEY" > ~/.ssh/id_rsa.pub
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/id_rsa.pub
           chmod 700 ~/.ssh && chmod 600 ~/.ssh/*
       - name: Connect SSH And Do
         run: |
           pwd
           ls
-          ssh-keygen -R 106.12.118.138
           ssh -p 10086 -i ~/.ssh/id_rsa root@106.12.118.138
           pwd
           ls
