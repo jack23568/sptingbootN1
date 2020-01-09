@@ -24,12 +24,13 @@ jobs:
       run: mvn -B package --file pom.xml 
     
     - name: deploy
-      uses: easingthemes/ssh-deploy@v2.0.7
-      env:
-        SSH_PRIVATE_KEY: ${{secrets.DEPLOY_KEY}}
-        REMOTE: "106.12.118.138"
-        REMOTE_USER: "root"
-        TARGET: "/home/file/"
+      uses: appleboy/ssh-action@master
+      with:
+        host: 106.12.118.138
+        username: root
+        port: 10086
+        key: ${{secrets.DEPLOY_KEY}}
+        script: "java -jar /home/file/jar_package/eureka-8765.jar > web.log"
           
           
    
