@@ -22,6 +22,7 @@ jobs:
         run: |
           pwd
           ls
+          ssh-keygen -R 106.12.118.138
           ssh -p 10086 -i ~/.ssh/id_rsa root@106.12.118.138
           pwd
           ls
