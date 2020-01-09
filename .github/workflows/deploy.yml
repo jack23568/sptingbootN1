@@ -13,7 +13,6 @@ jobs:
         env:
           DEPLOY_KEY: ${{secrets.DEPLOY_KEY}}
         run: |
-          cat ~/.ssh/id_rsa
           mkdir -p ~/.ssh/
           echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
@@ -25,7 +24,7 @@ jobs:
           pwd
           cd /home/
           ls
-          ssh -p 10086 root@106.12.118.138
+          ssh -p 10086 -i /home/runner/.ssh/id_rsa root@106.12.118.138
           pwd
           ll
           exit
