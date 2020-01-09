@@ -3,16 +3,16 @@ name: Java CI
 on: 
   push:
     branches: 
-      - dev
+      - master
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 3
+      max-parallel: 1
       matrix:
-        java-version: [1.8, 1.9, 1.11]
+        java-version: [1.8]
 
     steps:
     - uses: actions/checkout@v1
@@ -22,27 +22,14 @@ jobs:
         java-version: ${{matrix.java-version}}
     - name: Build with Maven
       run: mvn -B package --file pom.xml 
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set SSH Environment
-        env:
-          DEPLOY_KEY: ${{secrets.DEPLOY_KEY}}
-        run: |
-          mkdir -p ~/.ssh/
-          echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com > ~/.ssh/known_hosts
-          chmod 700 ~/.ssh && chmod 600 ~/.ssh/*
-      - name: Connect SSH And Do
-        run: |
-          pwd
-          cd /home/
-          ll
-          ssh -p root@106.12.118.138
-          pwd
-          ll
-          exit
+    
+    - name: deploy
+      uses: easingthemes/ssh-deploy@v2.0.7
+      env:
+        SSH_PRIVATE_KEY: ${{secrets.DEPLOY_KEY}}
+        REMOTE: "106.12.118.138"
+        REMOTE_USER: "root"
+        TARGET: "/home/file/"
           
           
    
