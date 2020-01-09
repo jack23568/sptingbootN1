@@ -20,13 +20,11 @@ jobs:
           chmod 700 ~/.ssh && chmod 600 ~/.ssh/*
       - name: Connect SSH And Do
         run: |
-          cat ~/.ssh/id_rsa
           pwd
-          cd /home/
           ls
-          ssh -p 10086 -i /home/runner/.ssh/id_rsa root@106.12.118.138
+          ssh -p 10086 -i ~/.ssh/id_rsa root@106.12.118.138
           pwd
-          ll
+          ls
           exit
           
           
