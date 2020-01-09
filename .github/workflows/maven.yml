@@ -22,3 +22,29 @@ jobs:
         java-version: ${{matrix.java-version}}
     - name: Build with Maven
       run: mvn -B package --file pom.xml 
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set SSH Environment
+        env:
+          DEPLOY_KEY: ${{secrets.DEPLOY_KEY}}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com > ~/.ssh/known_hosts
+          chmod 700 ~/.ssh && chmod 600 ~/.ssh/*
+      - name: Connect SSH And Do
+        run: |
+          pwd
+          cd /home/
+          mkdir project
+          cd project
+          pwd
+          ssh -p root@106.12.118.138
+          pwd
+          ll
+          exit
+          
+          
+   
